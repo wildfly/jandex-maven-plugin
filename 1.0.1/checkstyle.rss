@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>Jandex wrapper for Maven - Checkstyle report</title>
+    <link>http://jdcasey.github.com/jandex-maven-plugin/1.0.1</link>
+    <description>Jandex wrapper for Maven - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2012 JBoss by Red Hat</copyright>
+    <item>
+      <title>File: 2,
+             Errors: 60,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>http://jdcasey.github.com/jandex-maven-plugin/1.0.1/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://jdcasey.github.com/jandex-maven-plugin/1.0.1/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://jdcasey.github.com/jandex-maven-plugin/1.0.1/checkstyle.html#org.jboss.jandex.maven.FileSet.java">org/jboss/jandex/maven/FileSet.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  43
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://jdcasey.github.com/jandex-maven-plugin/1.0.1/checkstyle.html#org.jboss.jandex.maven.JandexGoal.java">org/jboss/jandex/maven/JandexGoal.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  17
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
