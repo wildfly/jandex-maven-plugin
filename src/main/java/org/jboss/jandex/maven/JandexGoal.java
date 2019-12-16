@@ -21,9 +21,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -112,6 +115,13 @@ public class JandexGoal
      */
     private boolean skip = true;
 
+    /**
+     * When true, show stale files in the log at info level else at debug level.
+     *
+     * @parameter property="showStaleFiles"
+     */
+    private boolean showStaleFiles;
+
     private Log log;
 
     public void execute()
@@ -196,6 +206,40 @@ public class JandexGoal
             scanner.scan();
             final String[] files = scanner.getIncludedFiles();
 
+            final File idx = new File( dir, "META-INF/" + indexName );
+
+            Set<String> stale = new LinkedHashSet<String>();
+            long lm = idx.isFile() ? idx.lastModified() : 0;
+            for ( final String file : files )
+            {
+                if ( file.endsWith( ".class" ) )
+                {
+                    long clm = new File( dir, file ).lastModified();
+                    if ( clm > lm )
+                    {
+                        stale.add( file );
+                    }
+                }
+            }
+            if ( !stale.isEmpty() )
+            {
+                getLog().info("Stale files detected, re-generating index." );
+                if ( showStaleFiles )
+                {
+                    getLog().info( "Stale files: " + join( ", ", stale ) );
+                }
+                else if ( getLog().isDebugEnabled() )
+                {
+                    getLog().debug("Stale files: " + join( ", ", stale ) );
+                }
+            }
+            else
+            {
+                // everything is in order, skip
+                getLog().info( "Skipping index generation, everything is up to date." );
+                return;
+            }
+
             for ( final String file : files )
             {
                 if ( file.endsWith( ".class" ) )
@@ -223,7 +267,6 @@ public class JandexGoal
                 }
             }
 
-            final File idx = new File( dir, "META-INF/"+indexName );
             idx.getParentFile()
                .mkdirs();
 
@@ -290,4 +333,23 @@ public class JandexGoal
     public void setIndexName(String indexName) {
         this.indexName = indexName;
     }
+
+    private static String join( String separator, Collection<String> objects )
+    {
+        if ( objects == null || objects.size() <= 0 )
+        {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for ( String obj : objects )
+        {
+            if ( sb.length() > 0 )
+            {
+                sb.append(separator);
+            }
+            sb.append(obj);
+        }
+        return sb.toString();
+    }
+
 }
