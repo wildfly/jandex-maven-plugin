@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>14</version>
+    <version>39</version>
   </parent>
 
   <groupId>org.jboss.jandex</groupId>
@@ -85,6 +85,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2023-06-13T06:06:51Z</project.build.outputTimestamp>
   </properties>
 
   <dependencyManagement>
@@ -129,12 +130,16 @@
           </configuration>
         </plugin>
         <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
-          <version>3.2</version>
+          <version>3.9.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.1</version>
+          <version>3.0.1</version>
           <configuration>
             <releaseProfiles>release</releaseProfiles>
           </configuration>
@@ -164,7 +169,7 @@
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.9.0</version>
               </plugin>
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -226,7 +231,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4</version>
+          <version>3.6.0</version>
           <executions>
             <execution>
               <id>project-assembly</id>
@@ -243,15 +248,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-source-plugin</artifactId>
-          <version>2.2.1</version>
-          <executions>
-            <execution>
-              <id>sources</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
@@ -265,21 +262,6 @@
               <configuration>
                 <detectOfflineLinks>false</detectOfflineLinks>
                 <additionalparam>-Xdoclint:none</additionalparam>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.5</version>
-          <executions>
-            <execution>
-              <id>gpg</id>
-              <goals>
-                <goal>sign</goal>
-              </goals>
-              <configuration>
-                <useAgent>false</useAgent>
               </configuration>
             </execution>
           </executions>
@@ -315,9 +297,6 @@
       <id>release</id>
       <build>
         <plugins>
-          <plugin>
-            <artifactId>maven-source-plugin</artifactId>
-          </plugin>
           <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
           </plugin>
